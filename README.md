@@ -23,9 +23,6 @@ Choose type as private hosted zone for VPC
 Select default vpc in the region you are setting up your cluster
 Select create
 
-
-
-
 Install kops on EC2 
 
 curl -LO https://github.com/kubernetes/kops/releases/download/v1.18.0/kops-linux-amd64
@@ -59,16 +56,16 @@ ssh-keygen
 
 
 Now create a cluster definition for your cluster: 
-kops create cluster \
---ssh-public-key ~/.ssh/id_rsa.pub \
---state=${KOPS_STATE_STORE} \
---node-count=1 \
---master-size=t2.micro \
---node-size=t2.micro \
---zones=us-east-1a \
---name=${KOPS_CLUSTER_NAME} \
---dns=private \
---master-count=1
+		kops create cluster \
+		--ssh-public-key ~/.ssh/id_rsa.pub \
+		--state=${KOPS_STATE_STORE} \
+		--node-count=1 \
+		--master-size=t2.micro \
+		--node-size=t2.micro \
+		--zones=us-east-1a \
+		--name=${KOPS_CLUSTER_NAME} \
+		--dns=private \
+		--master-count=1
 
 
 Note: Make sure your availability zone supports the instance type mentioned. Also, specify the key and the zone name.
