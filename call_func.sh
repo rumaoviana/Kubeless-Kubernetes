@@ -1,9 +1,10 @@
 #! /bin/sh
 
-ts=$(date +%s%N)
+x=1
+while [ $x -le 30 ]
+do
+  kubeless function call hello --data 'Hello world!'
+  x=$(( $x + 1 ))
+  time
+done
 
-$@
-
-kubeless function call hello --data 'Hello world!'
-
-echo $((($(date +%s%N) - $ts)/1000000))
