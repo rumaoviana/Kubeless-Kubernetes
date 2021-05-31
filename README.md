@@ -31,16 +31,22 @@ Install kops on EC2 using the following command:
 
 
 Install kubctl using the following command:
-	curl -LO https://dl.k8s.io/release/v1.18.0/bin/linux/amd64/kubectl
+
+	   curl -LO https://dl.k8s.io/release/v1.18.0/bin/linux/amd64/kubectl
+	   chmod +x ./kubectl
+	   sudo mv ./kubectl /usr/local/bin/kubectl
 
 S3 bucket is used by kubernetes to persist cluster state. Choose a unique bucket name.
 
 Configuring your environment variables :
 Open the Open .bashrc file by the following command:
+
 	vi ~/.bashrc
 	
 Add the following in your .bashsrc file: Enter your cluster name and the S3 bucket name using the following command:
-	export KOPS_CLUSTER_NAME=vianarumao.xyz
+
+        export KOPS_CLUSTER_NAME=vianarumao.xyz
+	
 	export KOPS_STATE_STORE=s3://vianarumao.in.k8s
 
 To reflect variables added to .bashrc type the below command:
@@ -50,11 +56,13 @@ To reflect variables added to .bashrc type the below command:
 
 Creating a SSH key pair
 Use the following command: 
+
 	ssh-keygen
 
 
 
 Now create a cluster definition for your cluster using the following command: 
+
 			kops create cluster \
 			--ssh-public-key ~/.ssh/id_rsa.pub \
 			--state=${KOPS_STATE_STORE} \
